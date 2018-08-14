@@ -1,37 +1,38 @@
 #ifndef GRAVITY_ASTROOBJECT_H
 #define GRAVITY_ASTROOBJECT_H
 
-enum astroType {planet, moon};
-enum astroSize {small, big};
+
+enum ASTRO_TYPE {planet, moon};
+enum ASTRO_SIZE {small, big};
 
 class AstroObject {
 
 public:
-    AstroObject (astroType type = planet, astroSize size = small, double xPosition = 0, double yPosition = 0);
+    AstroObject (ASTRO_TYPE type = planet, ASTRO_SIZE size = small, double xPosition = 0, double yPosition = 0);
+    ~AstroObject();
 
     void setPosition(double position []);
-    void setPosition(double x = 0, double y = 0);
-    void setPosition(int x = 0, int y = 0);
+    void setPosition(const double x = 0, const double y = 0);
+    void setPosition(const int x = 0, const int y = 0);
 
-    void setType(astroType type);
+    void setType(ASTRO_TYPE type);
 
-    void setSize(astroSize size);
+    void setSize(ASTRO_SIZE size);
 
     double getXPosition();
 
     double getYPosition();
 
-    astroType getType();
+    ASTRO_TYPE getType();
 
-    astroSize getSize();
+    ASTRO_SIZE getSize();
 
 
 
 private:
-
     double* position;
-    astroType type;
-    astroSize sizeOf;
+    ASTRO_TYPE type;
+    ASTRO_SIZE size;
 };
 
 #endif //GRAVITY_ASTROOBJECT_H
