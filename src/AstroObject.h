@@ -1,36 +1,45 @@
 #ifndef GRAVITY_ASTROOBJECT_H
 #define GRAVITY_ASTROOBJECT_H
 
+namespace astro {
+    enum ASTRO_TYPE {planet, moon};
+    enum ASTRO_SIZE {small, big};
+    const int DIMENSION_NUMBER = 2;
+}
 
-enum ASTRO_TYPE {planet, moon};
-enum ASTRO_SIZE {small, big};
+using namespace astro;
 
 class AstroObject {
 
 public:
-    AstroObject (ASTRO_TYPE type = planet, ASTRO_SIZE size = small, double xPosition = 0, double yPosition = 0);
-    ~AstroObject();
+    explicit AstroObject (ASTRO_TYPE type = planet, ASTRO_SIZE size = small, double xPosition = 0, double yPosition = 0);
 
-    void setPosition(double position []);
-    void setPosition(const double x = 0, const double y = 0);
-    void setPosition(const int x = 0, const int y = 0);
+    virtual ~AstroObject();
 
-    void setType(ASTRO_TYPE type);
-
-    void setSize(ASTRO_SIZE size);
-
-    double getXPosition();
-
-    double getYPosition();
+    virtual double* getPosition();
+    virtual double getXPosition();
+    virtual double getYPosition();
 
     ASTRO_TYPE getType();
-
     ASTRO_SIZE getSize();
 
+    virtual void setPosition(double* position);
+    virtual void setPosition(int* position);
 
+    void setPosition(double xPosition = 0, double yPosition = 0);
+    void setPosition(int xPostition = 0, int yPosition = 0);
+
+    void setXPosition(double xPosition = 0);
+    void setXPosition(int xPosition = 0);
+
+    void setYPosition(double yPosition = 0);
+    void setYPosition(int yPosition = 0);
+
+    void setType(ASTRO_TYPE type);
+    void setSize(ASTRO_SIZE size);
 
 private:
-    double* position;
+    double *position;
     ASTRO_TYPE type;
     ASTRO_SIZE size;
 };
