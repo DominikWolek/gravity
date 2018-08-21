@@ -33,7 +33,6 @@ int main() {
         assert(astroObject->getType() == type);
         assert(astroObject->getSize() == size);
         printf("%d. assertion passed\n", i + 2);
-
     }
 
     delete astroObject;

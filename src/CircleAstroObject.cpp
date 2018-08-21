@@ -1,22 +1,21 @@
 #include "CircleAstroObject.h"
 #include <SFML/Graphics.hpp>
 #include "AstroObject.h"
+#include <SFML/System/Vector2.hpp>
 
 using namespace astro;
 using namespace circleAstroColors;
 
-CircleAstroObject::CircleAstroObject (ASTRO_TYPE type, ASTRO_SIZE size, double xPosition, double yPosition) {
+CircleAstroObject::CircleAstroObject (ASTRO_TYPE type, ASTRO_SIZE size, sf::Vector2f position) {
     this->circleShape = new sf::CircleShape(getSizeOfAstroSize(size)); // size, thickness and position
-    this->circleShape->setPosition(xPosition, yPosition);
+    this->circleShape->setPosition(position);
     this->circleShape->setOutlineThickness(getOutlineThicknessOfAstroSize(size));
-
     this->circleShape->setFillColor(getFillColorOfAstroType(type)); //colors
     this->circleShape->setOutlineColor(getOutsideColorOfAstroType(type));
+    this->astroObject = new AstroObject(type, size);
 }
 
-void CircleAstroObject::doCircle(double center, double radius) {
-    // std::cout << I'd rather not << std::endl;
-}
+
 
 sf::CircleShape* CircleAstroObject::getCircleShape() {
     return this->circleShape;
@@ -66,18 +65,42 @@ int CircleAstroObject::getOutlineThicknessOfAstroSize(ASTRO_SIZE size) {
     }
 }
 
- double* CircleAstroObject::getPosition() {
-    return AstroObject::getPosition();
+
+
+ASTRO_TYPE CircleAstroObject::getAstroType() {
+    return this->astroObject->getType();
 }
 
-double CircleAstroObject::getXPosition() {
-    return AstroObject::getXPosition();
+ASTRO_SIZE CircleAstroObject::getAstroSize() {
+    return this->astroObject->getSize();
 }
 
-double CircleAstroObject::getYPosition() {
-    return AstroObject::getYPosition();
+sf::Vector2<float> CircleAstroObject::getPosition() {
+    return this->circleShape->getPosition();
 }
 
-void CircleAstroObject::setPosition(double *cords) {
-    AstroObject::setPosition(cords);
+void CircleAstroObject::setAstroType(ASTRO_TYPE type) {
+    this->astroObject->setType(type);
+    this->setColor(type);
 }
+
+void CircleAstroObject::setAstroSize(ASTRO_SIZE size) {
+    this->astroObject->setSize(size);
+    this->setSize(size);
+}
+
+void CircleAstroObject::setPosition(sf::Vector2f position) {
+    this->circleShape->setPosition(position);
+}
+
+void CircleAstroObject::setColor(ASTRO_TYPE type) {
+    this->circleShape->setFillColor(getFillColorOfAstroType(type));
+    this->circleShape->setOutlineColor(getFillColorOfAstroType(type));
+}
+
+void CircleAstroObject::setSize(ASTRO_SIZE size) {
+    this->circleShape->setRadius(getSizeOfAstroSize(size));
+}
+
+
+
