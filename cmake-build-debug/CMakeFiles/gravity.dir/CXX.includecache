@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/wol/repos/gravity/src/AstroObject.h
+
+/home/wol/repos/gravity/src/CircleAstroObject.h
+SFML/Graphics.hpp
+-
+SFML/System/Vector2.hpp
+-
+AstroObject.h
+/home/wol/repos/gravity/src/AstroObject.h
+Movement.h
+/home/wol/repos/gravity/src/Movement.h
+CircleMovement.h
+/home/wol/repos/gravity/src/CircleMovement.h
+
+/home/wol/repos/gravity/src/CircleMovement.h
+Movement.h
+/home/wol/repos/gravity/src/Movement.h
+
+/home/wol/repos/gravity/src/Movement.h
+SFML/System.hpp
+-
+
+/home/wol/repos/gravity/testCircleAstro.cpp
+SFML/Graphics.hpp
+-
+src/CircleAstroObject.h
+/home/wol/repos/gravity/src/CircleAstroObject.h
+SFML/System/Clock.hpp
+-
+SFML/System/Time.hpp
+-
+

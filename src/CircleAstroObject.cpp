@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "AstroObject.h"
 #include <SFML/System/Vector2.hpp>
+#include <stdio.h>
 
 using namespace astro;
 using namespace circleAstroColors;
@@ -23,6 +24,8 @@ sf::CircleShape* CircleAstroObject::getCircleShape() {
 
 CircleAstroObject::~CircleAstroObject() {
     delete this->circleShape;
+    delete this->movement;
+    delete this->astroObject;
 }
 
 sf::Color CircleAstroObject::getFillColorOfAstroType(ASTRO_TYPE type) {
@@ -46,20 +49,28 @@ sf::Color CircleAstroObject::getOutsideColorOfAstroType(ASTRO_TYPE type) {
 }
 
 int CircleAstroObject::getSizeOfAstroSize(ASTRO_SIZE size) {
-    if (size == big) {
-        return 240;
+    if (size == great) {
+        return 300;
+    } else if (size == big) {
+        return 200;
     } else if (size == small) {
-        return 40;
+        return 60;
+    } else if (size == tiny) {
+        return 20;
     } else {
         return 50;
     }
 }
 
 int CircleAstroObject::getOutlineThicknessOfAstroSize(ASTRO_SIZE size) {
-    if (size == big) {
+    if (size == great) {
+        return 15;
+    } else if (size == big) {
         return 10;
     } else if (size == small) {
         return 5;
+    } else if (size == tiny) {
+        return 3;
     } else {
         return 0;
     }
@@ -93,6 +104,11 @@ void CircleAstroObject::setPosition(sf::Vector2f position) {
     this->circleShape->setPosition(position);
 }
 
+void CircleAstroObject::setCenterPosition(sf::Vector2f position) {
+    float radius = this->getCircleShape()->getRadius();
+    this->setPosition({position.x - radius, position.y - radius});
+}
+
 void CircleAstroObject::setColor(ASTRO_TYPE type) {
     this->circleShape->setFillColor(getFillColorOfAstroType(type));
     this->circleShape->setOutlineColor(getFillColorOfAstroType(type));
@@ -102,5 +118,20 @@ void CircleAstroObject::setSize(ASTRO_SIZE size) {
     this->circleShape->setRadius(getSizeOfAstroSize(size));
 }
 
+void CircleAstroObject::update(float deltaTime) {
+    this->setCenterPosition(this->movement->movementFunc(deltaTime));
+}
+
+void CircleAstroObject::doCircle(sf::Vector2f center) {
+    this->movement = new CircleMovement(center, this->getCenterPosition(), 1);
+}
+
+sf::Vector2f CircleAstroObject::getCenterPosition() {
+    sf::Vector2f result = this->getPosition();
+    float radius = this->getCircleShape()->getRadius();
+    result.x += radius;
+    result.y += radius;
+    return result;
+}
 
 

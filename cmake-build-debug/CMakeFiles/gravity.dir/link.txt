@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11 -g  -rdynamic CMakeFiles/gravity.dir/testCircleAstro.cpp.o CMakeFiles/gravity.dir/src/AstroObject.cpp.o CMakeFiles/gravity.dir/src/CircleAstroObject.cpp.o CMakeFiles/gravity.dir/src/Movement.cpp.o CMakeFiles/gravity.dir/src/CircleMovement.cpp.o  -o gravity -lsfml-graphics -lsfml-system -lsfml-window -lsfml-network -lsfml-audio 

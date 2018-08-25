@@ -3,7 +3,7 @@
 
 namespace astro {
     enum ASTRO_TYPE {planet, moon};
-    enum ASTRO_SIZE {small, big};
+    enum ASTRO_SIZE {tiny, small, big, great};
     const int DIMENSION_NUMBER = 2;
 }
 

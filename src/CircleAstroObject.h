@@ -1,7 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Vector2.hpp>
 #include "AstroObject.h"
-
+#include "Movement.h"
+#include "CircleMovement.h"
 #ifndef GRAVITY_CIRCLEASTROOBJECT_H
 
 #define GRAVITY_CIRCLEASTROOBJECT_H
@@ -28,17 +29,24 @@ public:
     sf::CircleShape* getCircleShape();
 
     static sf::Color getFillColorOfAstroType (ASTRO_TYPE type);
+
     static sf::Color getOutsideColorOfAstroType(ASTRO_TYPE type);
     static int getSizeOfAstroSize (ASTRO_SIZE size);
     static int getOutlineThicknessOfAstroSize (ASTRO_SIZE size);
+    sf::Vector2f getPosition();
+    sf::Vector2f getCenterPosition();
 
-    sf::Vector2<float> getPosition();
     ASTRO_TYPE getAstroType();
     ASTRO_SIZE getAstroSize();
-
     void setPosition(sf::Vector2f position);
+    void setCenterPosition(sf::Vector2f position);
+
     void setAstroType(ASTRO_TYPE type);
     void setAstroSize(ASTRO_SIZE size);
+
+    void update(float deltaTime);
+
+    void doCircle(sf::Vector2f center);
 
 private:
     void setColor(ASTRO_TYPE type);
@@ -46,7 +54,7 @@ private:
 
     sf::CircleShape *circleShape;
     AstroObject *astroObject;
-
+    Movement *movement;
 };
 
 #endif //GRAVITY_CIRCLEASTROOBJECT_H
